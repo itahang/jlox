@@ -1,7 +1,7 @@
 #pragma once
 #include "Tokens.cpp"
 #include <vector>
-
+#include "Lox.cpp"
 class Scanner
 {
 public:
@@ -26,7 +26,7 @@ private:
         return current >= source.length();
     }
 
-    void void scanToken()
+    void scanToken()
     {
         char c = advance();
         switch (c)
@@ -60,6 +60,9 @@ private:
             break;
         case '*':
             addToken(TokenType::STAR);
+            break;
+        default:
+            Lox::error(line, "Unexpected character.");
             break;
         }
     }

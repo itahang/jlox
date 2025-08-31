@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -10,28 +11,45 @@
 class Lox
 {
 public:
-    static void report(int line, std::string where, std::string message)
-    {
-        std::cerr << "Line [" << line << "] where: " << message;
-        hasError = true;
-    }
-
     static void error(int line, std::string message)
     {
         report(line, "", message);
     }
 
-    template <typename T = std::string>
-    void run(T &&content)
+    int main(int argc, char **argv)
     {
-        std::vector<std::string> tokens;
-        std::istringstream iss(content); // wrap string in a stream
-        std::string token;
+        if (argc > 2)
+        {
+            std::cerr << "Usage: jlox [script]" << std::endl;
+            exit(64);
+        }
+        else if (argc == 2)
+        {
+            runFile(std::string(argv[1]));
+        }
+        else
+        {
+            runPrompt();
+        }
+        return 0;
+    }
 
-        while (iss >> token)
-        { // now >> works
-            tokens.push_back(token);
-            std::cout << token << "\n";
+    static bool hasError;
+
+private:
+    void runPrompt()
+    {
+        std::string line;
+        for (;;)
+        {
+            std::cout << ">> ";
+            std::getline(std::cin, line);
+            if (line == ".exit")
+            {
+                break;
+            }
+            run(line);
+            hasError = false;
         }
     }
 
@@ -52,39 +70,24 @@ public:
             exit(65);
         }
     }
+    template <typename T = std::string>
+    void run(T &&content)
+    {
+        std::vector<std::string> tokens;
+        std::istringstream iss(content); // wrap string in a stream
+        std::string token;
 
-    void runPrompt()
-    {
-        std::string line;
-        for (;;)
-        {
-            std::cout << ">> ";
-            std::getline(std::cin, line);
-            if (line == ".exit")
-            {
-                break;
-            }
-            run(line);
-            hasError = false;
-        }
-    }
-    int main(int argc, char **argv)
-    {
-        if (argc > 2)
-        {
-            std::cerr << "Usage: jlox [script]" << std::endl;
-            exit(64);
-        }
-        else if (argc == 2)
-        {
-            runFile(std::string(argv[1]));
-        }
-        else
-        {
-            runPrompt();
+        while (iss >> token)
+        { // now >> works
+            tokens.push_back(token);
+            std::cout << token << "\n";
         }
     }
 
-private:
-    static bool hasError;
+    static void report(int line, std::string where, std::string message)
+    {
+        std::cerr << "Line [" << line << "] where: " << message;
+        hasError = true;
+    }
 };
+bool Lox::hasError = false;
