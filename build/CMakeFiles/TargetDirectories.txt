@@ -1,0 +1,2 @@
+/home/ihang/jlox/build/CMakeFiles/edit_cache.dir
+/home/ihang/jlox/build/CMakeFiles/rebuild_cache.dir
