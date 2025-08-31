@@ -1,12 +1,12 @@
+#pragma once
+#include "TokenType.hpp"
 #include <string>
-#include <list>
 #include <any>
-#include"../include/TokenType.hpp"
 struct Token
 {
     TokenType type;
     std::string lexeme;
-    std::any literal; 
+    std::any literal;
     int line;
 
     Token(TokenType type, const std::string &lexeme, std::any literal, int line)
