@@ -61,10 +61,106 @@ private:
         case '*':
             addToken(TokenType::STAR);
             break;
+
+        case '!':
+            addToken(match('=') ? TokenType::BANG_EQUAL : TokenType::BANG);
+            break;
+        case '=':
+            addToken(match('=') ? TokenType::EQUAL_EQUAL : TokenType::EQUAL);
+            break;
+        case '<':
+            addToken(match('=') ? TokenType::LESS_EQUAL : TokenType::LESS);
+            break;
+        case '>':
+            addToken(match('=') ? TokenType::GREATER_EQUAL : TokenType::GREATER);
+            break;
+
+        case '/':
+            if (match('/'))
+            {
+                while (peek() != '\n' && !isAtEnd())
+                {
+                    advance();
+                }
+            }
+            else
+            {
+                addToken(TokenType::SLASH);
+            }
+        case ' ':
+        case '\r':
+        case '\t':
+            // Ignore whitespace.
+            break;
+
+        case '\n':
+            line++;
+            break;
         default:
-            Lox::error(line, "Unexpected character.");
+            if (isDigit(c))
+            {
+                number();
+            }
+            else
+            {
+                Lox::error(line, "Unexpected character.");
+            }
             break;
         }
+    }
+
+    void string()
+    {
+        while (peek() != '"' && !isAtEnd())
+        {
+            if (peek() == '\n')
+                line++;
+            advance();
+        }
+        if (isAtEnd())
+        {
+            Lox::error(line, "Unterminated string.");
+            return;
+        }
+        advance();
+        std::string value = source.substr(start + 1, current - 1);
+        addToken(TokenType::STRING, value);
+    }
+
+    char peekNext()
+    {
+        if (current + 1 >= source.length())
+            return '\0';
+        return source.at(current + 1);
+    }
+
+    void number()
+    {
+        while (isDigit(peek()))
+            advance();
+
+        // Look for a fractional part.
+        if (peek() == '.' && isDigit(peekNext()))
+        {
+            // Consume the "."
+            advance();
+
+            while (isDigit(peek()))
+                advance();
+        }
+
+        addToken(TokenType::NUMBER,
+                 std::atof(source.substr(start, current).c_str()));
+    }
+    bool isDigit(char c)
+    {
+        return c >= '0' && c <= '9';
+    }
+    char peek()
+    {
+        if (isAtEnd())
+            return '\0';
+        return source.at(current);
     }
 
     char advance()
@@ -80,6 +176,17 @@ private:
     {
         std::string text = source.substr(start, current);
         tokens.emplace_back(type, text, NULL, line);
+    }
+
+    bool match(char expected)
+    {
+        if (isAtEnd())
+            return false;
+        if (source.at(current) != expected)
+            return false;
+
+        current++;
+        return true;
     }
 
     std::string source;
