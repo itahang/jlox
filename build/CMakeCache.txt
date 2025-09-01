@@ -223,15 +223,6 @@ Jlox_IS_TOP_LEVEL:STATIC=ON
 //Value Computed by CMake
 Jlox_SOURCE_DIR:STATIC=/home/ihang/jlox
 
-//Value Computed by CMake
-Project_BINARY_DIR:STATIC=/home/ihang/jlox/build
-
-//Value Computed by CMake
-Project_IS_TOP_LEVEL:STATIC=ON
-
-//Value Computed by CMake
-Project_SOURCE_DIR:STATIC=/home/ihang/jlox
-
 
 ########################
 # INTERNAL cache entries

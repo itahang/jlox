@@ -1,2 +1,4 @@
+/home/ihang/jlox/build/CMakeFiles/Lexer.dir
+/home/ihang/jlox/build/CMakeFiles/main.dir
 /home/ihang/jlox/build/CMakeFiles/edit_cache.dir
 /home/ihang/jlox/build/CMakeFiles/rebuild_cache.dir

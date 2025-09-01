@@ -116,6 +116,128 @@ depend:
 	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
+#=============================================================================
+# Target rules for targets named Lexer
+
+# Build rule for target.
+Lexer: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Lexer
+.PHONY : Lexer
+
+# fast build rule for target.
+Lexer/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Lexer.dir/build.make CMakeFiles/Lexer.dir/build
+.PHONY : Lexer/fast
+
+#=============================================================================
+# Target rules for targets named main
+
+# Build rule for target.
+main: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 main
+.PHONY : main
+
+# fast build rule for target.
+main/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
+.PHONY : main/fast
+
+main.o: main.cpp.o
+.PHONY : main.o
+
+# target to build an object file
+main.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.cpp.o
+.PHONY : main.cpp.o
+
+main.i: main.cpp.i
+.PHONY : main.i
+
+# target to preprocess a source file
+main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.cpp.i
+.PHONY : main.cpp.i
+
+main.s: main.cpp.s
+.PHONY : main.s
+
+# target to generate assembly for a file
+main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.cpp.s
+.PHONY : main.cpp.s
+
+src/Lox.o: src/Lox.cpp.o
+.PHONY : src/Lox.o
+
+# target to build an object file
+src/Lox.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Lexer.dir/build.make CMakeFiles/Lexer.dir/src/Lox.cpp.o
+.PHONY : src/Lox.cpp.o
+
+src/Lox.i: src/Lox.cpp.i
+.PHONY : src/Lox.i
+
+# target to preprocess a source file
+src/Lox.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Lexer.dir/build.make CMakeFiles/Lexer.dir/src/Lox.cpp.i
+.PHONY : src/Lox.cpp.i
+
+src/Lox.s: src/Lox.cpp.s
+.PHONY : src/Lox.s
+
+# target to generate assembly for a file
+src/Lox.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Lexer.dir/build.make CMakeFiles/Lexer.dir/src/Lox.cpp.s
+.PHONY : src/Lox.cpp.s
+
+src/Scanner.o: src/Scanner.cpp.o
+.PHONY : src/Scanner.o
+
+# target to build an object file
+src/Scanner.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Lexer.dir/build.make CMakeFiles/Lexer.dir/src/Scanner.cpp.o
+.PHONY : src/Scanner.cpp.o
+
+src/Scanner.i: src/Scanner.cpp.i
+.PHONY : src/Scanner.i
+
+# target to preprocess a source file
+src/Scanner.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Lexer.dir/build.make CMakeFiles/Lexer.dir/src/Scanner.cpp.i
+.PHONY : src/Scanner.cpp.i
+
+src/Scanner.s: src/Scanner.cpp.s
+.PHONY : src/Scanner.s
+
+# target to generate assembly for a file
+src/Scanner.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Lexer.dir/build.make CMakeFiles/Lexer.dir/src/Scanner.cpp.s
+.PHONY : src/Scanner.cpp.s
+
+src/Tokens.o: src/Tokens.cpp.o
+.PHONY : src/Tokens.o
+
+# target to build an object file
+src/Tokens.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Lexer.dir/build.make CMakeFiles/Lexer.dir/src/Tokens.cpp.o
+.PHONY : src/Tokens.cpp.o
+
+src/Tokens.i: src/Tokens.cpp.i
+.PHONY : src/Tokens.i
+
+# target to preprocess a source file
+src/Tokens.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Lexer.dir/build.make CMakeFiles/Lexer.dir/src/Tokens.cpp.i
+.PHONY : src/Tokens.cpp.i
+
+src/Tokens.s: src/Tokens.cpp.s
+.PHONY : src/Tokens.s
+
+# target to generate assembly for a file
+src/Tokens.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Lexer.dir/build.make CMakeFiles/Lexer.dir/src/Tokens.cpp.s
+.PHONY : src/Tokens.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -124,6 +246,20 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... Lexer"
+	@echo "... main"
+	@echo "... main.o"
+	@echo "... main.i"
+	@echo "... main.s"
+	@echo "... src/Lox.o"
+	@echo "... src/Lox.i"
+	@echo "... src/Lox.s"
+	@echo "... src/Scanner.o"
+	@echo "... src/Scanner.i"
+	@echo "... src/Scanner.s"
+	@echo "... src/Tokens.o"
+	@echo "... src/Tokens.i"
+	@echo "... src/Tokens.s"
 .PHONY : help
 
 
