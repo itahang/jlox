@@ -5,6 +5,10 @@
 #include "../include/Scanner.hpp"
 #include <vector>
 #include <stdexcept> // for std::out_of_range
+#include <type_traits>
+
+template <typename T>
+constexpr bool is_string_v = std::is_same_v<T, std::string>;
 
 using Map = std::unordered_map<std::string, TokenType>;
 /**
@@ -125,6 +129,9 @@ void Scanner::scanToken()
     case '\n':
         line++;
         break;
+    case '"':
+        string();
+        break;
     default:
         if (isDigit(c))
         {
@@ -161,8 +168,8 @@ void Scanner::string()
         Lox::error(line, "Unterminated string.");
         return;
     }
+    std::string value = source.substr(start + 1, current - start - 1);
     advance();
-    std::string value = source.substr(start + 1, current - 1);
     addToken(TokenType::STRING, value);
 }
 /**
@@ -193,7 +200,7 @@ void Scanner::number()
     }
 
     addToken(TokenType::NUMBER,
-             std::atof(source.substr(start, current).c_str()));
+             std::atof(source.substr(start, current - start).c_str()));
 }
 /**
     Checks if the lexeme is identifier or not
@@ -204,7 +211,8 @@ void Scanner::identifier()
     while (isAlphaNumeric(peek()))
         advance();
 
-    std::string text = source.substr(start, current);
+    std::string text = source.substr(start, current - start);
+    // advance();
     TokenType type;
     try
     {
@@ -268,7 +276,15 @@ bool Scanner::isAlphaNumeric(char c)
 **/
 void Scanner::addToken(TokenType type, std::any literal)
 {
-    std::string text = source.substr(start, current);
+    if (literal.type() == typeid(std::string))
+    {
+        std::string text = source.substr(start + 1, current - start - 1);
+
+        tokens.emplace_back(type, text, literal, line);
+        return;
+    }
+    std::string text = source.substr(start, current - start);
+
     tokens.emplace_back(type, text, NULL, line);
 }
 
