@@ -1,8 +1,8 @@
 #include <unordered_map>
-#include "../include/TokenType.hpp"
-#include "../include/Lox.hpp"
-#include "../include/Token.hpp"
-#include "../include/Scanner.hpp"
+#include "TokenType.hpp"
+#include "Lox.hpp"
+#include "Token.hpp"
+#include "Scanner.hpp"
 #include <vector>
 #include <stdexcept> // for std::out_of_range
 #include <type_traits>
